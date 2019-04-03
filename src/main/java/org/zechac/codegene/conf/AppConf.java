@@ -25,8 +25,8 @@ public class AppConf {
     @Bean
     public VelocityEngine velocityEngine(){
         VelocityEngine ve = new VelocityEngine();
-        ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
-        ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+        ve.setProperty(RuntimeConstants.RESOURCE_LOADERS, "classpath");
+        ve.setProperty("resource.loader.classpath.class", ClasspathResourceLoader.class.getName());
         ve.init();
         return ve;
     }

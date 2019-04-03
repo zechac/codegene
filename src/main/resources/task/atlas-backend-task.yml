@@ -1,0 +1,5 @@
+tplRes: 'classpath:templates/'
+task:
+- name: '{moduleName}Controller.java'
+  tpl: atlas/backend/controller.vm
+  outPath: '{projDir}/controller/'

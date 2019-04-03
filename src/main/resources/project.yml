@@ -1,6 +1,8 @@
-projDir: C:/out/
+projDir: D:/out/
 author: zhaozh
-date: {now}
+date: '#now'
 extra:
- - a
- - b
+- a: 1
+  b: 2
+- a: 1
+  c: 3

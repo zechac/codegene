@@ -1,0 +1,9 @@
+/**
+ * @author $author
+ * @date $dateutils.format($date,"yyyy-MM-dd")
+ */
+public class ${moduleName}Controller {
+
+    public void main(){
+    }
+}

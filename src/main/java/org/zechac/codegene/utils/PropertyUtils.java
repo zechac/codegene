@@ -44,11 +44,11 @@ public class PropertyUtils {
        return null;
     }
 
-    public static Properties margeProperties(Map properties1, Map properties) {
+    public static Map margeProperties(Map properties1, Map properties) {
         properties.forEach((k,v)->{
-            //properties1.setProperty(k,v);
+            properties1.put(k,v);
         });
-        return null;
+        return properties1;
     }
 
     public static boolean exists(String location) {

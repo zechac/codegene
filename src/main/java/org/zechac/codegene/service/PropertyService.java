@@ -15,8 +15,7 @@ public class PropertyService {
     private String g1="classpath:project.yml";
     private String g2="file:project.yml";
 
-    public Properties loadProperties(String projName){
-        Properties prop=new Properties();
+    public Map loadProperties(String projName){
         //global
         Map p1= PropertyUtils.loadProperty(g1);
         if(PropertyUtils.exists(g2)){
@@ -30,6 +29,6 @@ public class PropertyService {
             Object object=env.getProperty(projName,Object.class);
         }
         */
-        return prop;
+        return p1;
     }
 }
