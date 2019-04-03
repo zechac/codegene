@@ -1,0 +1,14 @@
+tplRes: classpath:/templates/
+task:
+- name: controller
+  tpl: atlas/backend/controller.vm
+  out: {OutPath}/controller/{ModuleName}Controller.java
+- name: service
+  tpl: atlas/backend/service.vm
+  out: {OutPath}/service/{ModuleName}Controller.java
+- name: repo
+  tpl: atlas/backend/repo.vm
+  out: {OutPath}/repo/{ModuleName}Repo.java
+- name: entity
+  tpl: atlas/backend/entity.vm
+  out: {OutPath}/entity/{ModuleName}Entity.java
