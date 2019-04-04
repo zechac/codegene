@@ -1,6 +1,6 @@
 package ${packageName}.controller;
 
-import ${packageName}.entity.${moduleName}Entity;
+import ${packageName}.domain.${moduleName}Entity;
 import ${packageName}.service.${moduleName}Service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class ${moduleName}Controller {
     */
     @RequestMapping("/page")
     public JsonResponse page(Pageable pageable, @RequestParam Map requestParam){
-        Page page= articleService.queryByPage(pageable);
+        Page page= service.queryByPage(pageable);
         return JsonResponse.success().data(page);
     }
 
@@ -40,10 +40,8 @@ public class ${moduleName}Controller {
     */
     @RequestMapping("/get/{id}")
     public JsonResponse get(@PathVariable Long id){
-        ArticleEntity articleEntity=articleService.findById(id);
-        ArticleTypeEntity articleTypeEntity=articleEntity.getArticleType();
-        articleEntity.getContent();
-        return JsonResponse.success().data(articleEntity);
+        ${moduleName}Entity entity=service.findById(id);
+        return JsonResponse.success().data(entity);
     }
 
     /**
@@ -51,8 +49,8 @@ public class ${moduleName}Controller {
     * @return
     */
     @RequestMapping("/save")
-    public JsonResponse save(@RequestBody ArticleEntity articleEntity){
-        articleService.save(articleEntity);
+    public JsonResponse save(@RequestBody ${moduleName}Entity entity){
+        service.save(entity);
         return JsonResponse.success();
     }
 
@@ -61,8 +59,8 @@ public class ${moduleName}Controller {
     * @return
     */
     @RequestMapping("/delete")
-    public JsonResponse delete(@RequestBody ArticleEntity articleEntity){
-        articleService.deleteEntity(articleEntity);
+    public JsonResponse delete(@RequestBody ${moduleName}Entity entity){
+        service.deleteEntity(entity);
         return JsonResponse.success();
     }
 

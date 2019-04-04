@@ -1,5 +1,5 @@
 tplRes: 'classpath:templates/'
-packageName: org.test.app
+packageName: com.ac.zkwz
 task:
 - name: '{moduleName}Controller.java'
   tpl: atlas/backend/controller.vm
@@ -9,7 +9,7 @@ task:
   outPath: '{projDir}/service/'
 - name: '{moduleName}Entity.java'
   tpl: atlas/backend/entity.vm
-  outPath: '{projDir}/entity/'
+  outPath: '{projDir}/domain/'
 - name: '{moduleName}Repo.java'
   tpl: atlas/backend/repo.vm
   outPath: '{projDir}/repo/'

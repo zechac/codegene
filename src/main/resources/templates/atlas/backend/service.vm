@@ -1,7 +1,7 @@
-package $packageName;
+package ${packageName}.service;
 
-import ${packageName}.entity.${moduleName}Entity;
-import ${packageName}.entity.${moduleName}Repo;
+import ${packageName}.domain.${moduleName}Entity;
+import ${packageName}.repo.${moduleName}Repo;
 import org.zechac.atlas.common.repo.BaseRepo;
 import org.springframework.stereotype.Service;
 import org.zechac.atlas.common.services.BaseServiceImpl;
