@@ -1,9 +1,69 @@
+package ${packageName}.controller;
+
+import ${packageName}.entity.${moduleName}Entity;
+import ${packageName}.service.${moduleName}Service;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
+import org.zechac.atlas.common.web.JsonResponse;
+
+import java.util.Map;
+
 /**
+ * $moduleName 控制器
  * @author $author
  * @date $dateutils.format($date,"yyyy-MM-dd")
  */
+@Slf4j
+@RestController
 public class ${moduleName}Controller {
 
-    public void main(){
+    @Autowired
+    private ${moduleName}Service service;
+
+    /**
+    * 列表
+    * @param requestParam
+    * @return
+    */
+    @RequestMapping("/page")
+    public JsonResponse page(Pageable pageable, @RequestParam Map requestParam){
+        Page page= articleService.queryByPage(pageable);
+        return JsonResponse.success().data(page);
     }
+
+    /**
+    * 获取单个
+    * @return
+    */
+    @RequestMapping("/get/{id}")
+    public JsonResponse get(@PathVariable Long id){
+        ArticleEntity articleEntity=articleService.findById(id);
+        ArticleTypeEntity articleTypeEntity=articleEntity.getArticleType();
+        articleEntity.getContent();
+        return JsonResponse.success().data(articleEntity);
+    }
+
+    /**
+    * 添加/编辑动态列表
+    * @return
+    */
+    @RequestMapping("/save")
+    public JsonResponse save(@RequestBody ArticleEntity articleEntity){
+        articleService.save(articleEntity);
+        return JsonResponse.success();
+    }
+
+    /**
+    * 删除动态列表
+    * @return
+    */
+    @RequestMapping("/delete")
+    public JsonResponse delete(@RequestBody ArticleEntity articleEntity){
+        articleService.deleteEntity(articleEntity);
+        return JsonResponse.success();
+    }
+
 }

@@ -1,0 +1,12 @@
+package ${packageName}.repo;
+
+import ${packageName}.entity.${moduleName}Entity;
+import org.zechac.atlas.common.repo.BaseRepo;
+/**
+* $moduleName 控制器
+* @author $author
+* @date $dateutils.format($date,"yyyy-MM-dd")
+*/
+public class ${moduleName}Repo extends BaseRepo<${moduleName}Entity,Long>{
+
+}

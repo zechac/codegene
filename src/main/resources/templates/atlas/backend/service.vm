@@ -1,0 +1,17 @@
+package $packageName;
+
+import ${packageName}.entity.${moduleName}Entity;
+import ${packageName}.entity.${moduleName}Repo;
+import org.zechac.atlas.common.repo.BaseRepo;
+import org.springframework.stereotype.Service;
+import org.zechac.atlas.common.services.BaseServiceImpl;
+
+/**
+* $moduleName 服务
+* @author $author
+* @date $dateutils.format($date,"yyyy-MM-dd")
+*/
+@Service
+public class ${moduleName}Service extends BaseServiceImpl<${moduleName}Entity, ${moduleName}Repo> {
+
+}

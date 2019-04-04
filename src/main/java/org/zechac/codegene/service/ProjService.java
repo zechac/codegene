@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Properties;
 
 @Component
-public class PropertyService {
+public class ProjService {
 
     private String g1="classpath:project.yml";
     private String g2="file:project.yml";

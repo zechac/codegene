@@ -10,7 +10,7 @@ import org.zechac.codegene.utils.Constants;
 
 import java.util.Properties;
 
-@ShellComponent
+@ShellComponent("atlas 模板生成")
 public class AtlasProjGene {
 
     @Autowired

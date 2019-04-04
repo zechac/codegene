@@ -1,0 +1,19 @@
+package ${packageName}.entity;
+
+import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.zechac.atlas.common.jpa.entity.AutoIncrementId;
+
+import javax.persistence.*;
+
+/**
+* $moduleName 实体
+* @author $author
+* @date $dateutils.format($date,"yyyy-MM-dd")
+*/
+@Data
+@Entity
+public class ${moduleName}Entity extends AutoIncrementId{
+
+}

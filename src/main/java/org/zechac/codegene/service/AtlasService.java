@@ -20,7 +20,7 @@ public class AtlasService {
     @Autowired
     private VelocityTplService velocityTplService;
     @Autowired
-    private PropertyService propertyService;
+    private ProjService projService;
     @Autowired
     private TaskService taskService;
 
@@ -28,7 +28,7 @@ public class AtlasService {
      * 生成后台模板
      */
     public void geneBackendTpl(Properties properties){
-        Map properties1=propertyService.loadProperties(projName);
+        Map properties1= projService.loadProperties(projName);
         Map res= PropertyUtils.margeProperties(properties1,properties);
         Map taskRes= TaskUtils.loadTask(bTask);
         List<Map> task=(List) taskRes.get("task");
