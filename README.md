@@ -1,5 +1,5 @@
 # codegene
-基于groovy模板引擎的代码生成器
+基于spring shell 和 velocity模板引擎的代码生成器
 
 ###生成逻辑
 #####1.加载classpath下的project.yml
