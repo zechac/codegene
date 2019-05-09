@@ -6,7 +6,6 @@ import org.zechac.codegene.utils.Constants;
 import org.zechac.codegene.utils.PathUtils;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.StringWriter;
 import java.util.Map;
@@ -22,7 +21,7 @@ public class TaskService {
             res.put("data",task.get("data"));
         }
         String tplName=task.get(Constants.Tpl).toString();
-        StringWriter stringWriter= velocityTplService.randerTpl(tplName,res);
+        StringWriter stringWriter= velocityTplService.renderTpl(tplName,res);
         String outPath=task.get(Constants.OutPath).toString();
         outPath= PathUtils.buildPath(outPath,res);
         File file=new File(outPath);
@@ -31,7 +30,7 @@ public class TaskService {
         fileName=PathUtils.buildPath(fileName,res);
         try {
             FileOutputStream fileOutputStream=new FileOutputStream(new File(file,fileName));
-            fileOutputStream.write(stringWriter.toString().getBytes());
+            fileOutputStream.write(stringWriter.toString().getBytes("UTF-8"));
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -16,7 +16,7 @@ import java.util.Properties;
 public class AtlasService {
 
     private final String projName="atlas-backend";
-    private final String bTask="classpath:task/atlas-backend-task.yml";
+    private final String bTask="task/atlas-backend-task.yml";
     @Autowired
     private VelocityTplService velocityTplService;
     @Autowired

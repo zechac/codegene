@@ -28,7 +28,7 @@ public class VelocityTplService {
      * @param data
      * @return
      */
-    public StringWriter randerTpl(String tplName,Map data){
+    public StringWriter renderTpl(String tplName, Map data){
         Template t = velocityEngine.getTemplate(tplPath+tplName);
         VelocityContext ctx = new VelocityContext();
         ctx.put("dateutils",new DateUtils());

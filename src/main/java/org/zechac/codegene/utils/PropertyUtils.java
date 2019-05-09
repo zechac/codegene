@@ -1,12 +1,11 @@
 package org.zechac.codegene.utils;
 
-import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.yaml.snakeyaml.Yaml;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,15 +18,20 @@ public class PropertyUtils {
      */
     public static Map loadProperty(String location){
         Resource resource=null;
-        if(location.startsWith("classpath:")){
-            location=location.replace("classpath:","");
-            resource=new ClassPathResource(location);
-        }
         if(location.startsWith("file:")){
             location=location.replace("file:","");
             resource=new FileSystemResource(location);
+        }else if(location.startsWith("classpath:")){
+            location=location.replace("classpath:","");
+            resource=new ClassPathResource(location);
+        }else{
+            String currentDir= System.getProperty("user.dir");
+            String fileDir=currentDir+ File.separator+location;
+            resource = new FileSystemResource(fileDir);
+            if(!resource.exists()) {
+                resource=new ClassPathResource(location);
+            }
         }
-
         Yaml yaml = new Yaml();
         try {
             return yaml.loadAs(resource.getInputStream(), HashMap.class);
