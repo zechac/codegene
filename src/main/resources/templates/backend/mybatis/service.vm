@@ -1,0 +1,57 @@
+package ${packageName}.service;
+
+import ${packageName}.entity.${className}Entity;
+import ${packageName}.mapper.${className}Mapper;
+import ${packageName}.utils.PageView;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
+
+/**
+* $className 服务
+* @author $author
+* @date $_du.now()
+*/
+@Service
+@Transactional
+public class ${className}Service {
+
+    @Autowired
+    private ${className}Mapper mapper;
+
+    public PageView queryByPage(${className}Entity entity) {
+        int cont=mapper.cont(entity);
+        List<${className}Entity> entities=mapper.list(entity);
+        return PageView.of(cont,entities);
+    }
+
+    public ${className}Entity findById(Integer id) {
+        ${className}Entity entity=new ${className}Entity();
+        entity.setId(id);
+        List<${className}Entity> list = mapper.list(entity);
+        if(list==null||list.size()==0){
+            return null;
+        }
+        return list.get(0);
+    }
+
+    public List queryAll(${className}Entity entity) {
+        return mapper.list(entity);
+    }
+
+    public void save(${className}Entity entity) {
+        if(entity.getId()!=null){
+            mapper.update(entity);
+        }else{
+            mapper.insert(entity);
+        }
+    }
+
+    public void deleteById(int id) {
+        ${className}Entity entity=new ${className}Entity();
+        entity.setId(id);
+        mapper.delete(entity);
+    }
+
+}

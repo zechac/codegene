@@ -1,0 +1,12 @@
+package ${packageName}.repo;
+
+import ${packageName}.entity.${className}Entity;
+import org.springframework.data.jpa.repository.JpaRepository;
+/**
+* $className repo
+* @author $author
+* @date $_du.now()
+*/
+public interface ${className}Repo extends JpaRepository<${className}Entity,Integer>{
+
+}

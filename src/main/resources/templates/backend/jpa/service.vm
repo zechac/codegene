@@ -1,0 +1,49 @@
+package ${packageName}.service;
+
+import ${packageName}.entity.${className}Entity;
+import ${packageName}.repo.${className}Repo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+
+/**
+* $className 服务
+* @author $author
+* @date $_du.now()
+*/
+@Service
+@Transactional
+public class ${className}Service {
+
+    @Autowired
+    private ${className}Repo repo;
+
+    public Page queryByPage(${className}Entity entity, Pageable pageable) {
+        ExampleMatcher exampleMatcher=ExampleMatcher.matching();
+        exampleMatcher.withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+        Example<${className}Entity> entityExample=Example.of(entity,exampleMatcher);
+        return repo.findAll(entityExample,pageable);
+    }
+
+    public ${className}Entity findById(Integer id) {
+        return repo.getOne(id);
+    }
+
+    public List queryAll() {
+        return repo.findAll();
+    }
+
+    public void save(${className}Entity entity) {
+        repo.save(entity);
+    }
+
+    public void deleteById(int id) {
+        repo.deleteById(id);
+    }
+
+}

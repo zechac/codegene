@@ -17,11 +17,11 @@ public class AtlasProjGene {
     private AtlasService atlasService;
 
     @ShellMethod(value = "后台代码生成",key = "ab")
-    public String backendGene(
+    public String atlasGene(
             @ShellOption(value = {"-m","-module"},help = "模块名称") String module,
             @ShellOption(value = {"-md","--module-desc"},help = "模块描述",defaultValue = "")String moduleDesc){
         Properties properties=new Properties();
-        properties.setProperty(Constants.ModuleName,module);
+        properties.setProperty(Constants.ClassName,module);
         properties.setProperty(Constants.ModuleDesc,moduleDesc);
         atlasService.geneBackendTpl(properties);
         return "gene success";

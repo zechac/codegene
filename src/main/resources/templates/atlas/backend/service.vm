@@ -9,7 +9,7 @@ import org.zechac.atlas.common.services.BaseServiceImpl;
 /**
 * $moduleName 服务
 * @author $author
-* @date $dateutils.format($date,"yyyy-MM-dd")
+* @date $_du.now()
 */
 @Service
 public class ${moduleName}Service extends BaseServiceImpl<${moduleName}Entity, ${moduleName}Repo> {

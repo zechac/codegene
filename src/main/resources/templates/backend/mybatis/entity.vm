@@ -1,0 +1,31 @@
+package ${packageName}.entity;
+
+import lombok.Data;
+import java.util.Date;
+
+/**
+* $className 实体
+* @author $author
+* @date $_du.now()
+*/
+@Data
+public class ${className}Entity extends ViewModel {
+
+    private Integer id;
+
+    private Date createTime;
+
+    private Date updateTime;
+
+    private String createBy;
+
+    private String updateBy;
+
+    #foreach($field in $fields)
+        #foreach($f in $field.entrySet())
+    private $f.value $f.key;
+
+        #end
+    #end
+
+}

@@ -12,7 +12,7 @@
 	<artifactId>codegene</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>codegene</name>
-	<description>基于groovy 模板引擎的代码生成器</description>
+	<description>基于velocity 模板引擎的代码生成器</description>
 
 	<properties>
 		<java.version>1.8</java.version>

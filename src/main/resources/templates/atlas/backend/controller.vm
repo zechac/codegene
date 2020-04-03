@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * $moduleName 控制器
  * @author $author
- * @date $dateutils.format($date,"yyyy-MM-dd")
+ * @date $_du.now()
  */
 @Slf4j
 @RestController

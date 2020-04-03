@@ -1,0 +1,78 @@
+package ${packageName}.controller;
+
+import ${packageName}.entity.${className}Entity;
+import ${packageName}.service.${className}Service;
+import ${packageName}.utils.JsonResponse;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
+import java.util.List;
+
+/**
+ * $className 控制器
+ * @author $author
+ * @date $_du.now()
+ */
+@Slf4j
+@RestController
+@RequestMapping("api/$_su.toLower(${className})")
+public class ${className}Controller {
+
+    @Autowired
+    private ${className}Service service;
+
+    /**
+    * 列表
+    * @return
+    */
+    @RequestMapping("page")
+    public JsonResponse page(Pageable pageable, @RequestBody ${className}Entity entity){
+        Page page= service.queryByPage(entity,pageable);
+        return JsonResponse.success().data(page);
+    }
+
+    /**
+    * 所有
+    * @return
+    */
+    @RequestMapping("all")
+    public JsonResponse page(){
+        List data= service.queryAll();
+        return JsonResponse.success().data(data);
+    }
+
+    /**
+    * 获取单个实体
+    * @return
+    */
+    @RequestMapping("get/{id}")
+    public JsonResponse get(@PathVariable Integer id){
+        ${className}Entity entity=service.findById(id);
+        return JsonResponse.success().data(entity);
+    }
+
+    /**
+    * 添加/编辑
+    * @return
+    */
+    @RequestMapping("save")
+    public JsonResponse save(@RequestBody ${className}Entity entity){
+        service.save(entity);
+        return JsonResponse.success();
+    }
+
+    /**
+    * 删除
+    * @return
+    */
+    @RequestMapping("delete/id")
+    public JsonResponse delete(@PathVariable int id){
+        service.deleteById(id);
+        return JsonResponse.success();
+    }
+
+}

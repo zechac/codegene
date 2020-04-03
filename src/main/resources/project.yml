@@ -1,8 +1,8 @@
-projDir: C:\Users\hua\Desktop\test
-author: zhaozh
-date: '#now'
-extra:
-- a: 1
-  b: 2
-- a: 1
-  c: 3
+#projDir: E:\Desktop\code\wyyy\demo\src
+projDir: E:\Desktop\code\fruitmgr\backend\src\main\java\com\h2bus\backend
+packageName: com.h2bus.backend
+className: Example
+author: admin
+fields:
+  - name: String
+    title: String

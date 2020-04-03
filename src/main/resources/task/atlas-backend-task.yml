@@ -1,15 +1,15 @@
-tplRes: 'classpath:templates/'
+tplRes: 'classpath:templates/atlas/'
 packageName: com.ac.zkwz
 task:
-- name: '{moduleName}Controller.java'
-  tpl: atlas/backend/controller.vm
+- name: '{className}Controller.java'
+  tpl: backend/controller.vm
   outPath: '{projDir}/controller/'
-- name: '{moduleName}Service.java'
-  tpl: atlas/backend/service.vm
+- name: '{className}Service.java'
+  tpl: backend/service.vm
   outPath: '{projDir}/service/'
-- name: '{moduleName}Entity.java'
-  tpl: atlas/backend/entity.vm
+- name: '{className}Entity.java'
+  tpl: backend/entity.vm
   outPath: '{projDir}/domain/'
-- name: '{moduleName}Repo.java'
-  tpl: atlas/backend/repo.vm
+- name: '{className}Repo.java'
+  tpl: backend/mapper.vm
   outPath: '{projDir}/repo/'

@@ -1,0 +1,15 @@
+#backend-jpa template
+tplRes: 'classpath:templates/backend/'
+task:
+  - name: '{className}Controller.java'
+    tpl: jpa/controller.vm
+    outPath: '{projDir}/controller/'
+  - name: '{className}Service.java'
+    tpl: jpa/service.vm
+    outPath: '{projDir}/service/'
+  - name: '{className}Entity.java'
+    tpl: jpa/entity.vm
+    outPath: '{projDir}/entity/'
+  - name: '{className}Repo.java'
+    tpl: jpa/repo.vm
+    outPath: '{projDir}/repo/'

@@ -1,0 +1,18 @@
+#backend-mybatis template
+tplRes: 'classpath:templates/backend/'
+task:
+  - name: '{className}Controller.java'
+    tpl: mybatis/controller.vm
+    outPath: '{projDir}/controller/'
+  - name: '{className}Service.java'
+    tpl: mybatis/service.vm
+    outPath: '{projDir}/service/'
+  - name: '{className}Entity.java'
+    tpl: mybatis/entity.vm
+    outPath: '{projDir}/entity/'
+  - name: '{className}Mapper.java'
+    tpl: mybatis/mapper.vm
+    outPath: '{projDir}/mapper/'
+  - name: '{className}Mapper.xml'
+    tpl: mybatis/mapperxml.vm
+    outPath: '{projDir}/mapper/'

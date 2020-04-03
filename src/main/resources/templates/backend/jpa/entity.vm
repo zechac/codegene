@@ -1,0 +1,37 @@
+package ${packageName}.entity;
+
+import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import javax.persistence.*;
+import java.util.Date;
+
+/**
+* $className 实体
+* @author $author
+* @date $_du.now()
+*/
+@Data
+@Entity
+public class ${className}Entity {
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Integer id;
+
+    private Date createTime;
+
+    private Date updateTime;
+
+    private String createBy;
+
+    private String updateBy;
+
+    #foreach($field in $fields)
+        #foreach($f in $field.entrySet())
+    private $f.value $f.key;
+
+        #end
+    #end
+
+}

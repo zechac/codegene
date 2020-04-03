@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.zechac.codegene.utils.Constants;
 import org.zechac.codegene.utils.DateUtils;
+import org.zechac.codegene.utils.StringUtils;
 import org.zechac.codegene.utils.ValueUtils;
 
 import java.io.StringWriter;
@@ -31,7 +32,8 @@ public class VelocityTplService {
     public StringWriter renderTpl(String tplName, Map data){
         Template t = velocityEngine.getTemplate(tplPath+tplName);
         VelocityContext ctx = new VelocityContext();
-        ctx.put("dateutils",new DateUtils());
+        ctx.put("_du",new DateUtils());
+        ctx.put("_su",new StringUtils());
         data.forEach((k,v)->{
             v= ValueUtils.build(v,data);
             ctx.put(k.toString(),v);

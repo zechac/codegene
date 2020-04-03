@@ -1,0 +1,62 @@
+package ${packageName}.mapper;
+
+import ${packageName}.entity.${className}Entity;
+
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
+
+import java.util.List;
+
+/**
+* $className mapper
+* @author $author
+* @date $_du.now()
+*/
+public interface ${className}Mapper {
+    List<${className}Entity> list(@Param("p")${className}Entity entity);
+
+    int cont(@Param("p")${className}Entity entity);
+
+    ${className}Entity one(@Param("p")${className}Entity entity);
+
+    void delete(@Param("p")${className}Entity entity);
+
+    @Options(useGeneratedKeys = true)
+    @Insert("insert into ${className}("+
+    #foreach($field in $fields)
+        #foreach($f in $field.entrySet())
+        "$f.key,"+
+        #end
+    #end
+        "createTime,"+
+        "updateTime,"+
+        "createBy,"+
+        "updateBy"+
+    ")" +
+    "values("+
+    #foreach($field in $fields)
+        #foreach($f in $field.entrySet())
+        "#{p.$f.key},"+
+        #end
+    #end
+        "#{p.createTime},"+
+        "#{p.updateTime},"+
+        "#{p.createBy},"+
+        "#{p.updateBy}"+
+    ")")
+    int insert(@Param("p")${className}Entity entity);
+
+    @Update("update ${className} set"+
+    #foreach($field in $fields)
+        #foreach($f in $field.entrySet())
+        " $f.key = #{p.$f.key},"+
+        #end
+    #end
+        " updateTime = #{p.updateTime},"+
+        " updateBy = #{p.updateBy}"+
+        " where id = #{p.id}")
+    void update(@Param("p")${className}Entity entity);
+}

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.h2bus.backend.mapper.CollectMapper">
+
+    <select id="cont" resultType="java.lang.Integer">
+        select count(*) from ${className} c
+        <where>
+            <if test="p.id != null">
+                c.id = #{p.id}
+            </if>
+            #foreach($field in $fields)
+                #foreach($f in $field.entrySet())
+            <if test="p.$f.key != null">
+                and c.$f.key = #{p.$f.key}
+            </if>
+                #end
+            #end
+        </where>
+    </select>
+
+    <select id="list" resultType="${packageName}.entity.${className}Entity">
+        select c.* from ${className} c
+        <where>
+            <if test="p.id != null">
+                c.id = #{p.id}
+            </if>
+            #foreach($field in $fields)
+                #foreach($f in $field.entrySet())
+            <if test="p.$f.key != null">
+                and c.$f.key = #{p.$f.key}
+            </if>
+                #end
+            #end
+        </where>
+        <if test="p.page != null &amp;&amp; p.size != null">
+            limit #{p.poff},#{p.size}
+        </if>
+    </select>
+
+    <select id="one" resultType="${packageName}.entity.${className}Entity">
+        select * from ${className} c
+        <where>
+            <if test="p.id != null">
+                c.id = #{p.id}
+            </if>
+            #foreach($field in $fields)
+                #foreach($f in $field.entrySet())
+            <if test="p.$f.key != null">
+                and c.$f.key = #{p.$f.key}
+            </if>
+                #end
+            #end
+        </where>
+        limit 1
+    </select>
+
+    <delete id="delete" >
+        delete from ${className} c
+        <where>
+            <if test="p.id != null">
+                c.id = #{p.id}
+            </if>
+            #foreach($field in $fields)
+                #foreach($f in $field.entrySet())
+            <if test="p.$f.key != null">
+                and c.$f.key = #{p.$f.key}
+            </if>
+                #end
+            #end
+        </where>
+    </delete>
+</mapper>

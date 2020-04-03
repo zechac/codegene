@@ -10,7 +10,7 @@ import javax.persistence.*;
 /**
 * $moduleName 实体
 * @author $author
-* @date $dateutils.format($date,"yyyy-MM-dd")
+* @date $_du.now()
 */
 @Data
 @Entity

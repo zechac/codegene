@@ -5,7 +5,7 @@ import org.zechac.atlas.common.repo.BaseRepo;
 /**
 * $moduleName 控制器
 * @author $author
-* @date $dateutils.format($date,"yyyy-MM-dd")
+* @date $_du.now()
 */
 public interface ${moduleName}Repo extends BaseRepo<${moduleName}Entity,Long>{
 

@@ -1,5 +1,7 @@
 package org.zechac.codegene.utils;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +17,9 @@ public class PathUtils {
             ls.add(matcher.group());
         }
         for(String s :ls){
+            if(res.get(s)==null){
+                throw new RuntimeException(String.format("参数[%s]不存在",s));
+            }
             pathTpl=pathTpl.replace("{"+s+"}",res.get(s).toString());
         }
         return pathTpl;

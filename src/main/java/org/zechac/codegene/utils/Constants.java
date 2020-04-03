@@ -21,7 +21,7 @@ public class Constants {
     /**
      * 模块名称
      */
-    public static final String ModuleName = "moduleName";
+    public static final String ClassName = "className";
     /**
      * 模块描述
      */

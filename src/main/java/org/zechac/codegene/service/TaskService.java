@@ -31,6 +31,7 @@ public class TaskService {
         try {
             FileOutputStream fileOutputStream=new FileOutputStream(new File(file,fileName));
             fileOutputStream.write(stringWriter.toString().getBytes("UTF-8"));
+            fileOutputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
