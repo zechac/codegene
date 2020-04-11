@@ -40,8 +40,8 @@ public class ${className}Controller {
     * @return
     */
     @RequestMapping("all")
-    public JsonResponse page(){
-        List data= service.queryAll();
+    public JsonResponse page(@RequestBody ${className}Entity entity){
+        List data= service.queryAll(entity);
         return JsonResponse.success().data(data);
     }
 
@@ -53,6 +53,16 @@ public class ${className}Controller {
     public JsonResponse get(@PathVariable Integer id){
         ${className}Entity entity=service.findById(id);
         return JsonResponse.success().data(entity);
+    }
+
+    /**
+    * 获取单个实体
+    * @return
+    */
+    @RequestMapping("one")
+    public JsonResponse get(@RequestBody ${className}Entity entity){
+        ${className}Entity entity1=service.findOne(entity);
+        return JsonResponse.success().data(entity1);
     }
 
     /**
@@ -72,6 +82,16 @@ public class ${className}Controller {
     @RequestMapping("delete/id")
     public JsonResponse delete(@PathVariable int id){
         service.deleteById(id);
+        return JsonResponse.success();
+    }
+
+    /**
+    * 删除
+    * @return
+    */
+    @RequestMapping("delete")
+    public JsonResponse delete(@RequestBody ${className}Entity entity){
+        service.deleteById(entity.getId());
         return JsonResponse.success();
     }
 

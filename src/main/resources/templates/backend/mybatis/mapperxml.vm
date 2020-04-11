@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.h2bus.backend.mapper.CollectMapper">
+<mapper namespace="com.h2bus.backend.mapper.${className}Mapper">
 
     <select id="cont" resultType="java.lang.Integer">
         select count(*) from ${className} c
@@ -55,15 +55,15 @@
     </select>
 
     <delete id="delete" >
-        delete from ${className} c
+        delete from ${className}
         <where>
             <if test="p.id != null">
-                c.id = #{p.id}
+                id = #{p.id}
             </if>
             #foreach($field in $fields)
                 #foreach($f in $field.entrySet())
             <if test="p.$f.key != null">
-                and c.$f.key = #{p.$f.key}
+                and $f.key = #{p.$f.key}
             </if>
                 #end
             #end

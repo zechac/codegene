@@ -23,7 +23,7 @@ public class ${className}Service {
     public PageView queryByPage(${className}Entity entity) {
         int cont=mapper.cont(entity);
         List<${className}Entity> entities=mapper.list(entity);
-        return PageView.of(cont,entities);
+        return PageView.of(entities,entity.getPage(),cont);
     }
 
     public ${className}Entity findById(Integer id) {

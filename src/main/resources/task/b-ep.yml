@@ -1,0 +1,9 @@
+#backend-mybatis template
+tplRes: 'classpath:templates/backend/'
+task:
+  - name: '{className}.js'
+    tpl: express/route.vm
+    outPath: '{projDir}/routes/'
+  - name: '{className}-repo.js'
+    tpl: express/repo.vm
+    outPath: '{projDir}/repo/'

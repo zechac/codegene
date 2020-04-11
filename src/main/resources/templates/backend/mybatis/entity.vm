@@ -9,17 +9,7 @@ import java.util.Date;
 * @date $_du.now()
 */
 @Data
-public class ${className}Entity extends ViewModel {
-
-    private Integer id;
-
-    private Date createTime;
-
-    private Date updateTime;
-
-    private String createBy;
-
-    private String updateBy;
+public class ${className}Entity extends BaseEntity {
 
     #foreach($field in $fields)
         #foreach($f in $field.entrySet())

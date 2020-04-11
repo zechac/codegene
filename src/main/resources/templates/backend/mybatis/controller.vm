@@ -4,10 +4,9 @@ import ${packageName}.entity.${className}Entity;
 import ${packageName}.service.${className}Service;
 import ${packageName}.utils.JsonResponse;
 import ${packageName}.entity.ViewModel;
+import ${packageName}.utils.PageView;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -34,8 +33,7 @@ public class ${className}Controller {
     public JsonResponse page(@RequestBody ${className}Entity entity,ViewModel vm){
         entity.setPage(vm.getPage());
         entity.setSize(vm.getSize());
-        entity.setSort(vm.getSort());
-        Page page= service.queryByPage(entity,pageable);
+        PageView page= service.queryByPage(entity);
         return JsonResponse.success().data(page);
     }
 
@@ -44,8 +42,8 @@ public class ${className}Controller {
     * @return
     */
     @RequestMapping("all")
-    public JsonResponse page(@RequestBody ${className}Entity entity){
-        List data= service.queryAll();
+    public JsonResponse all(@RequestBody ${className}Entity entity){
+        List data= service.queryAll(entity);
         return JsonResponse.success().data(data);
     }
 
@@ -53,10 +51,10 @@ public class ${className}Controller {
     * 获取单个实体
     * @return
     */
-    @RequestMapping("get/{id}")
-    public JsonResponse get(@PathVariable Integer id){
-        ${className}Entity entity=service.findById(id);
-        return JsonResponse.success().data(entity);
+    @RequestMapping("one")
+    public JsonResponse get(@RequestBody ${className}Entity entity){
+        ${className}Entity rentity=service.findById(entity.getId());
+        return JsonResponse.success().data(rentity);
     }
 
     /**
@@ -73,9 +71,9 @@ public class ${className}Controller {
     * 删除
     * @return
     */
-    @RequestMapping("delete/id")
-    public JsonResponse delete(@PathVariable int id){
-        service.deleteById(id);
+    @RequestMapping("delete")
+    public JsonResponse delete(@RequestBody ${className}Entity entity){
+        service.deleteById(entity.getId());
         return JsonResponse.success();
     }
 

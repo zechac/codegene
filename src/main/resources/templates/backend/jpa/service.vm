@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
 * $className 服务
@@ -34,8 +35,18 @@ public class ${className}Service {
         return repo.getOne(id);
     }
 
-    public List queryAll() {
-        return repo.findAll();
+    public ${className}Entity findOne(${className}Entity entity) {
+        ExampleMatcher exampleMatcher=ExampleMatcher.matching();
+        exampleMatcher.withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+        Example<${className}Entity> entityExample=Example.of(entity,exampleMatcher);
+        return repo.findOne(entityExample).orElse(null);
+    }
+
+    public List queryAll(${className}Entity entity) {
+        ExampleMatcher exampleMatcher=ExampleMatcher.matching();
+        exampleMatcher.withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+        Example<${className}Entity> entityExample=Example.of(entity,exampleMatcher);
+        return repo.findAll(entityExample);
     }
 
     public void save(${className}Entity entity) {

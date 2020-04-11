@@ -1,0 +1,203 @@
+var _q=require('../utils/mysql-utils')
+var _c=require('../config/mysql-config')
+module.exports = {
+
+    buildInsert:function(entity){
+        let sql=`insert into ${className}(
+        #foreach($field in $fields)
+            #foreach($f in $field.entrySet())
+            $f.key,
+            #end
+        #end
+        createTime,
+        updateTime,
+        createBy,
+        updateBy
+        )values(
+        #foreach($field in $fields)
+            #foreach($f in $field.entrySet())
+            ?,
+            #end
+        #end
+        ?,?,?,?)`
+        let vals=[]
+        #foreach($field in $fields)
+            #foreach($f in $field.entrySet())
+                #if($f.value == 'Date')
+        if(entity.$f.value){
+            entity.$f.key=new Date(entity.$f.key)
+        }
+                #end
+            #end
+        #end
+        #foreach($field in $fields)
+            #foreach($f in $field.entrySet())
+        vals.push(entity.$f.key)
+            #end
+        #end
+        vals.push(entity.createTime)
+        vals.push(entity.updateTime)
+        vals.push(entity.createBy)
+        vals.push(entity.updateBy)
+        return {sql,params:vals}
+    },
+    buildUpdate:function(entity){
+        let sql=`update user set
+        #foreach($field in $fields)
+            #foreach($f in $field.entrySet())
+                $f.key = ? ,
+            #end
+        #end
+        updateTime = ?,
+        updateBy = ?
+        where id = ?`
+
+        let vals=[]
+        #foreach($field in $fields)
+            #foreach($f in $field.entrySet())
+                #if($f.value == 'Date')
+                if(entity.$f.value){
+                    entity.$f.key=new Date(entity.$f.key)
+                }
+                #end
+            #end
+        #end
+        #foreach($field in $fields)
+            #foreach($f in $field.entrySet())
+            vals.push(entity.$f.key)
+            #end
+        #end
+        vals.push(entity.updateTime)
+        vals.push(entity.updateBy)
+        vals.push(entity.id)
+        return {sql,params:vals}
+    },
+    buildDelete:function(entity){
+        let sql=`delete from user `
+        let q=this.buildWhere(entity)
+        q.sql=sql+q.sql
+        return q
+    },
+    buildCont:function(entity){
+        let sql = `select count(*) from user `
+        let q=this.buildWhere(entity)
+        q.sql=sql+q.sql
+        return q
+    },
+    buildSelect:function(entity){
+        let sql = `select * from user `
+        let q=this.buildWhere(entity)
+        q.sql=sql+q.sql
+        return q
+    },
+    buildPageSelect:function(entity){
+        let sql = `select * from user `
+        let q=this.buildWhere(entity)
+        q.sql=sql+q.sql
+        let page=this.buildPage(entity)
+        q.sql+=page.sql
+        q.params.concat(page.params)
+        return q
+    },
+    buildWhere:function(entity,alise){
+        if(!alise){
+            alise=""
+        }
+        let sql=""
+        let first=true
+        let vals=[]
+        #foreach($field in $fields)
+            #foreach($f in $field.entrySet())
+                #if($f.value == 'Date')
+                if(entity.$f.value){
+                    entity.$f.key=new Date(entity.$f.key)
+                }
+                #end
+            #end
+        #end
+        #foreach($field in $fields)
+            #foreach($f in $field.entrySet())
+            if(entity.id){
+                if(first){
+                    first=false
+                    sql=" where"
+                }else{
+                    sql+=" and"
+                }
+                sql+= ` $f.key = ?`
+                vals.push(entity.$f.key)
+            }
+            #end
+        #end
+        if(entity.cusWhere){
+            if(first){
+                first=false
+                sql=" where"
+            }else{
+                sql+=" and"
+            }
+            sql+=" " + entity.cusWhere
+        }
+        return {sql,params:vals}
+    },
+    buildOrderBy:function(entity){
+
+    },
+    buildPage:function(entity){
+        let sql=""
+        if(entity.page&&entity.size){
+            let p=parseInt(entity.page)
+            if(p>0){
+                p-=1
+            }
+            let poff=(p)*entity.size
+            sql = " limit "+ poff+","+entity.size
+        }
+        return {sql,params:[]}
+    },
+
+    queryPage:function (entity,callback,conn) {
+        let _conn=_c.createConnection()
+        let contsql=this.buildCont(entity)
+        _q.count(contsql,r=>{
+            let data={totalElemets:r.data}
+            let listsql=this.buildPageSelect(entity)
+            _q.findList(listsql,r=>{
+                data.content=r.data
+                _conn.end()
+                callback({success:true,data})
+            },_conn)
+        },_conn)
+    },
+
+    queryAll:function (entity,callback,conn) {
+        let sql=this.buildSelect(entity)
+        _q.findList(sql,r=>{
+            callback(r)
+        })
+    },
+
+    queryOne:function (entity,callback,conn) {
+        let sql=this.buildSelect(entity)
+        sql.sql+=" limit 1"
+        _q.findOne(sql,r=>{
+            callback(r)
+        })
+    },
+
+    save:function (entity,callback,conn) {
+        let p={}
+        if(entity.id){
+            p=this.buildUpdate(entity)
+        }else{
+            p=this.buildInsert(entity)
+        }
+        _q.exec(p,callback,conn)
+    },
+
+    del:function (entity,callback,conn) {
+        let p=this.buildDelete(entity)
+        _q.exec(p,callback,conn)
+    }
+
+}

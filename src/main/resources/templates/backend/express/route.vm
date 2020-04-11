@@ -1,0 +1,38 @@
+var express = require('express');
+var router = express.Router();
+var repo = require("../repo/user-repo")
+
+/* $className page. */
+router.all('/${className}/page', function(req, res, next) {
+    req.body.page=req.query.page
+    req.body.size=req.query.size||10
+    repo.queryPage(req.body,r=>{
+        res.json(r)
+    })
+})
+
+router.all('/${className}/all', function(req, res, next) {
+    repo.queryAll(req.body,r=>{
+        res.json(r)
+    })
+})
+
+router.all('/${className}/one', function(req, res, next) {
+    repo.queryOne(req.body,r=>{
+        res.json(r)
+    })
+})
+
+router.all('/${className}/save', function(req, res, next) {
+    repo.save(req.body,r=>{
+        res.json(r)
+    })
+})
+
+router.all('/${className}/delete', function(req, res, next) {
+    repo.del(req.body,r=>{
+        res.json(r)
+    })
+})
+
+module.exports = router;

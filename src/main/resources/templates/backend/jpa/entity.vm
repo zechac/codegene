@@ -13,19 +13,7 @@ import java.util.Date;
 */
 @Data
 @Entity
-public class ${className}Entity {
-
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Integer id;
-
-    private Date createTime;
-
-    private Date updateTime;
-
-    private String createBy;
-
-    private String updateBy;
+public class ${className}Entity extends BaseEntity {
 
     #foreach($field in $fields)
         #foreach($f in $field.entrySet())
